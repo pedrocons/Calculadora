@@ -4,9 +4,30 @@ import Button from './src/components/Button';
 import Display from './src/components/Display';
 import React, { Component, useState } from 'react';
 
+const initialState = {
+  displayvalue: '0',
+  cleardisplay: false,
+  operation: null,
+  values: [0, 0],
+  current: 0,
+
+}
+
 export default class App extends Component {
-  state = { displayvalue: '0' }
-  addDigit = n => { this.setState({ displayvalue: n }) }
+  state = { ...initialState }
+  addDigit = n => {
+    if (n === '.' && this.state.displayvalue.includes('.')) {
+      return
+    }
+    const cleardisplay = this.state.displayvalue === '0' || this.state.cleardisplay
+    const currentvalue = cleardisplay ? '' : this.state.displayvalue
+    const displayvalue = currentvalue + n
+    this.setState({ displayvalue, cleardisplay: false })
+  }
+  if (n =! '.') {
+    
+  }
+
   clearmemory = () => { this.setState({ displayvalue: '0' }) }
   setoperation = operation => { }
   render() {
